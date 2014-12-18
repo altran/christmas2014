@@ -7,24 +7,76 @@
   <meta name="description" content="Altran Christmas Card 2014">
   <meta name="author" content="Altran">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/skeleton.css">
   <link rel="icon" type="image/png" href="images/favicon.png" />
-
+  <style>
+    body {
+      padding-top: 2em;
+      background-color: #333;
+      /*
+      background: url(images/bg.jpg);
+      background-size: cover;
+      */
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #fff;
+      text-align: center
+    }
+    .altran { width: 300px;}
+    .ink35 {
+      position: absolute;
+      bottom: 5%;
+      right: 30%;
+      max-height: 30vh;
+      max-width: 90%;
+      z-index: 3;
+    }
+    .ground {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+    }
+    .window-lit {
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+      cursor: pointer;
+    }
+    canvas {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+  </style>
 </head>
 <body>
 
   <div class="container">
-    <div class="row">
-      <div class="one-half column">
-        <h1>God Jul</h1>
-        <h2>&amp;</h2>
-        <h1>Godt Nyttår</h1>
-        <p>This index.html page is a placeholder with the CSS, font and favicon. It's just waiting for you to add some content! If you need some help hit up the <a href="http://www.getskeleton.com">Skeleton documentation</a>.</p>
-      </div>
-    </div>
+        <h1><a href="http://altran.no"><img src="images/altran.png" alt="Altran" class="altran"></a></h1>
+        <h5>ønsker alle våre venner</h5>
+        <h1>God Jul &amp; Godt Nyttår</h1>
   </div>
+  <img src="images/ink35.svg" alt="Building" class="ink35">
+  <img src="images/ground.svg" alt="Snowy ground" class="ground">
+  
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // we need a full screen canvas, but the canvas tag doesn't support percentage widths
+        // so we simply write out the canvas tag using javascript
+        document.write('<div style="background:url(../images/background.jpg) repeat-x;position:absolute;left:0;top:'+($(window).height()-193)+'px;width:100%;height:200px;"></div>');
+        document.write('<canvas id="cv" width="'+$(window).width()+'" height="'+($(window).height()-100)+'" style="position:absolute;left:0;top:0;"></canvas>');
+        // obviously, this become wrong if the browser window changes size
+        // so we simply reload the page on resize
+    </script>
+  <script src="js/fireworks.js"></script>
 
 </body>
 </html>
