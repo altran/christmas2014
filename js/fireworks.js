@@ -34,9 +34,8 @@ $(document).ready(function(){
         if (resizeTimer) clearTimeout(resizeTimer); 
         resizeTimer = setTimeout("location.reload()", 100); 
     }); 
-    $('.ink35').click(function(){
-        FireworkDisplay.launchText();
-    });
+    
+    FireworkDisplay.launchText();
 
 });
 
