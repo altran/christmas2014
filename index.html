@@ -41,7 +41,6 @@
     $ink35.click(egg);
 
     function egg(){
-      console.log('Christmas egg!');
       $santa.toggleClass('santa-moving');
       clearTimeout(turnSantaTimeout);
       turnSantaTimeout = window.setTimeout(egg,8000);
