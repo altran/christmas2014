@@ -60,8 +60,6 @@ a img {border:none;}
   left: 0;
   right: 0;
   z-index: 2;
-  background: url(images/ground.svg);
-  background-size: cover;
 }
 .santa {
   height: 100%;
