@@ -33,6 +33,7 @@ h1 {
 }
 
 .altran { width: 250px; max-width: 50%;}
+.altranlink {position: relative; z-index: 10}
 .ink35 {
   height: 100%;
   width: 100%;
