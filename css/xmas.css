@@ -31,7 +31,7 @@ h1 {
   margin:.25em 0;
   padding:0;
 }
-
+a img {border:none;}
 .altran { width: 250px; max-width: 50%;}
 .altranlink {position: relative; z-index: 10}
 .ink35 {
@@ -64,6 +64,7 @@ h1 {
   background-size: cover;
 }
 .santa {
+  height: 100%;
   width: 100%;
   max-width: 50%;
   max-height: 10vh;
@@ -91,13 +92,27 @@ h1 {
    @-moz-keyframes ridindirty { from { margin-top:0%; } to { margin-top:10%; }  }
      @-o-keyframes ridindirty { from { margin-top:0%; } to { margin-top:10%; }  }
         @keyframes ridindirty { from { margin-top:0%; } to { margin-top:10%; }  }
-.whydahBox, .acsBox {
+.gift {
   position: absolute;
   top:0;
   left:-100%;
   z-index: 10;
   width:1em;
   height:1em;
+}
+.gift img {
+  position:relative;
+  z-index: 10;
+}
+.shadow {
+  width: 110%;
+  padding-bottom:30%;
+  position: absolute;
+  z-index: 10;
+  left: -1%;
+  bottom: -10%;
+  border-radius: 30%;
+  background-color: rgba(0,20,50,0.2);
 }
 .flipBox {
   -webkit-animation: flipBox 1s ease-in-out;

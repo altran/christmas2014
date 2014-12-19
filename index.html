@@ -16,8 +16,16 @@
   <h1>God Jul &amp; Godt Nyttår</h1>
 
   <img src="images/santa.svg" alt="Santa" class="santa">
-  <a href="http://getwhydah.com" class="whydahBox"><img src="images/whydahbox.svg" alt="Whydah" style="width:100%"></a>
-  <a href="http://altran.github.io/acs" class="acsBox"><img src="images/acsbox.svg" alt="ACS" style="width:100%"></a>
+  <div class="gifts">
+    <a href="http://getwhydah.com" class="gift whydahBox">
+      <div class="shadow"></div>
+      <img src="images/whydahbox.svg" alt="Whydah" style="width:100%">
+    </a>
+    <a href="http://altran.github.io/acs" class="gift acsBox">
+      <div class="shadow"></div>
+      <img src="images/acsbox.svg" alt="ACS" style="width:100%">
+    </a>
+  </div>
 
   <div class="street">
     <img src="images/ground.svg" alt="Ground" class="ground">
@@ -32,12 +40,18 @@
   <script src="js/jquery-ui-effects.min.js"></script>
   <script src="js/fireworks.js"></script>
   <script>
+    var giftMultiplier = 10;
     var turnSantaTimeout;
-    var presentsDropped = false;
+    var giftsDropped = false;
     var $santa = $('.santa');
     var $ink35 = $('.ink35');
-    var $whydahBox = $('.whydahBox');
-    var $acsBox = $('.acsBox');
+    var animationConf = {
+      duration: 1000,
+      specialEasing: {
+        left: 'linear',
+        top:'easeOutBounce'
+      }
+    };
     $ink35.click(egg);
 
     function egg(){
@@ -45,43 +59,42 @@
       $santa.toggleClass('santa-moving');
       clearTimeout(turnSantaTimeout);
       turnSantaTimeout = window.setTimeout(egg,8000);
-      if(!presentsDropped){
-        window.setTimeout(dropWhydah,3000);
-        window.setTimeout(dropAcs,3500);
-        presentsDropped = true;
+      if(!giftsDropped){
+        if($(document).width()<768) giftMultiplier = 6;
+        for(var i = 0; i<giftMultiplier; i++){
+          var boxType = '.whydahBox';
+          if(Math.random()>0.5) boxType = '.acsBox';
+          $(boxType).clone().removeClass('whydahBox acsBox').appendTo('.gifts');
+        }
+        window.setTimeout(dropPresents,2000);
+        giftsDropped = true;
       }
-    }
-    function dropWhydah(){
-      dropPresents('whydah');
-    }
-    function dropAcs(){
-      dropPresents('acs');
     }
     function dropPresents(type){
-      $santa.width();
+      var giftsCount = $('.gift').length;
+      $('.gift').each(function(i,e){
+        window.setTimeout(function(){
+          dropPresent(i,giftsCount,e);
+        }, i*250);
+      })
+    }
+    function dropPresent(index,count,element){
+      
       var santaOffset = $santa.offset();
       var ink35Offset = $ink35.offset();
-      var animationConf = {
-        duration: 1000,
-        specialEasing: {
-          left: 'linear',
-          top:'easeOutBounce'
-        }
-      };
+      var targetValues = {};
+      var randomOffset = (0.5-Math.random())*($(document).width()/count)*0.5;
+      
       santaOffset.left = santaOffset.left+$santa.width()*0.4;
-      ink35Offset.left = ink35Offset.left+$ink35.width()/2;
-      ink35Offset.top = ink35Offset.top+$ink35.height()*0.7;
-      ink35Offset.width = '2em';
-      ink35Offset.height = '2em';
-      if(type=='whydah'){
-        ink35Offset.left = ink35Offset.left+$whydahBox.width()*1.3;
-        $whydahBox.addClass('flipBox').offset(santaOffset);
-        $whydahBox.animate(ink35Offset, animationConf);
-      } else if(type=='acs') {
-        ink35Offset.left = ink35Offset.left-$acsBox.width()*1.3;
-        $acsBox.addClass('flipBox').offset(santaOffset);
-        $acsBox.animate(ink35Offset, animationConf);
-      }
+
+      targetValues.top = ink35Offset.top+$ink35.height()*0.95+randomOffset*0.3;
+      targetValues.left = $(document).width()*(index/count)+randomOffset;
+      targetValues.width = '2em';
+      targetValues.height = '2em';
+      targetValues['margin-top'] = '-2em';
+
+      $(element).addClass('flipBox').offset(santaOffset);
+      $(element).animate(targetValues, animationConf);
     }
   </script>
   <script>
